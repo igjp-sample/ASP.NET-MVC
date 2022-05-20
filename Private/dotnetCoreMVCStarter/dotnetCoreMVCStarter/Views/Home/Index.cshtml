@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<table id="grid"></table>
+
+@section Scripts{
+    <script>
+        $(function () {
+            //バインドデータの準備、および、igGrid の初期化
+            var northwindProducts = [
+                { "ProductID": 1, "ProductName": "果汁100% オレンジ", "CategoryName": "飲料", "InStock": 39 },
+                { "ProductID": 30, "ProductName": "いくら", "CategoryName": "魚介類", "InStock": 10 }
+            ];
+
+            $("#grid").igGrid({
+                dataSource: northwindProducts,
+                columns: [
+                    { headerText: "製品 ID", key: "ProductID", dataType: "number", width: "25%" },
+                    { headerText: "製品名", key: "ProductName", dataType: "string", width: "25%" },
+                    { headerText: "カテゴリ", key: "CategoryName", dataType: "string", width: "25%" },
+                    { headerText: "在庫数", key: "InStock", dataType: "number", width: "25%" }
+                ],
+                features: [
+
+                    {
+                        name: "Filtering",
+                        type: "local"
+                    },
+                    {
+                        name: "Paging",
+                        pageSize: 10
+                    }
+                ]
+            });
+        });
+    </script>
+}

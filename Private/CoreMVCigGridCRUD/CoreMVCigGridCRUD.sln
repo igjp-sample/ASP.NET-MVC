@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreMVCigGridCRUD", "CoreMVCigGridCRUD\CoreMVCigGridCRUD.csproj", "{AF859C77-17DF-4580-90F2-FC818ECF7C8F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF859C77-17DF-4580-90F2-FC818ECF7C8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF859C77-17DF-4580-90F2-FC818ECF7C8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF859C77-17DF-4580-90F2-FC818ECF7C8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF859C77-17DF-4580-90F2-FC818ECF7C8F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {82C0A8BA-CD21-46CD-B92C-BF7707AE29B5}
+	EndGlobalSection
+EndGlobal

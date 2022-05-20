@@ -1,0 +1,97 @@
+﻿@using Infragistics.Web.Mvc
+@model IEnumerable<CoreMVCigGridCRUD.Models.Dummy>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+
+    <!-- Ignite UI Required Combined CSS Files -->
+    <link href="https://cdn-na.infragistics.com/igniteui/2021.1/latest/css/themes/infragistics/infragistics.theme.css" rel="stylesheet" />
+    <link href="https://cdn-na.infragistics.com/igniteui/2021.1/latest/css/structure/infragistics.css" rel="stylesheet" />
+
+    <script src="https://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.8.3.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+
+    <!-- Ignite UI Required Combined JavaScript Files -->
+    <script src="https://cdn-na.infragistics.com/igniteui/2021.1/latest/js/infragistics.core.js"></script>
+    <script src="https://cdn-na.infragistics.com/igniteui/2021.1/latest/js/infragistics.lob.js"></script>
+
+    <style>
+        #message {
+            background: #eee;
+            padding: 1em 1.5em;
+            margin-top: 1em;
+            max-width: 752px;
+            height: 60px;
+            overflow: auto;
+        }
+        #message p {
+            margin: 0;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    @(Html.Infragistics().Grid(Model.AsQueryable())
+        .ID("Grid")
+        .Width("800px")
+        .AutoGenerateColumns(false)
+        .AutoGenerateLayouts(false)
+        .AutoCommit(true)
+        .PrimaryKey("Id")
+        .Columns(column =>
+        {
+            column.For(x => x.Id).HeaderText("ID").Width("10%");
+            column.For(x => x.Col1).HeaderText("Column1");
+            column.For(x => x.Col2).HeaderText("Column2");
+            column.For(x => x.Col3).HeaderText("Column3");
+            column.For(x => x.Col4).HeaderText("Column4");
+            column.For(x => x.Col5).HeaderText("Column5");
+        })
+        .Features(feature =>
+        {
+            feature
+            .Updating()
+            .EditMode(GridEditMode.Cell)
+            .ColumnSettings(cs =>
+            {
+                cs.ColumnSetting().ColumnKey("Id").ReadOnly(true);
+            })
+            .Inherit(true).AddClientEvent("editCellEnded", "changeData").AddClientEvent("rowDeleted", "changeData").AddClientEvent("rowAdded", "changeData");
+            feature.Sorting();
+            
+        })
+        .UpdateUrl(Url.Action("SaveData"))
+        .DataBind()
+        .Render()
+    )
+
+    <div id="message"></div>
+
+    <script>
+        function changeData(evt, ui) {
+            if (ui.rowAdding) {
+                return false; // Cancel event if adding new row
+            }
+            var obj = document.getElementById('message');
+            $("#Grid").igGrid("saveChanges", function (data) {
+                $("#message").append("\<p\>Changes were saved successfully\<\/p\>");
+                obj.scrollTop = obj.scrollHeight;
+            },
+            function (jqXHR, textStatus, errorThrown) {
+                $("#message").append("\<p\>An error occurred while saving the changes. Error details: " + textStatus + "\<\/p\>");
+                obj.scrollTop = obj.scrollHeight;
+            });
+        }
+    </script>
+</body>
+</html>
